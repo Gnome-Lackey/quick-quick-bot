@@ -24,6 +24,10 @@
   "bugs": {
     "url": "https://github.com/Gnome-Lackey/quick-quick-bot/issues"
   },
+  "pre-commit": [
+    "lint",
+    "build"
+  ],
   "homepage": "https://github.com/Gnome-Lackey/quick-quick-bot#readme",
   "dependencies": {
     "@types/node": "^14.0.22",
@@ -41,6 +45,7 @@
     "clean-webpack-plugin": "^3.0.0",
     "eslint": "^7.4.0",
     "eslint-plugin-filenames": "^1.3.2",
+    "pre-commit": "^1.2.2",
     "prettier": "^1.18",
     "source-map": "^0.7.3"
   }
