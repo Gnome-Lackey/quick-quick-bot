@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./build/bot.js",
     "build": "tsc -p tsconfig.json",
-    "lint": "eslint --ext .ts,.tsx src/"
+    "lint": "eslint --ext .ts src/"
   },
   "repository": {
     "type": "git",

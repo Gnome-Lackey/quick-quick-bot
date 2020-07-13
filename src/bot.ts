@@ -4,7 +4,7 @@ const qq = new Client();
 
 const qqCommandRegex = /^qq!/;
 
-function buildNameList(filePath: string): string {
+function buildNameListText(filePath: string): string {
   const listOfNames: string[] = require(filePath);
   const nameCount = listOfNames.length;
 
@@ -45,8 +45,8 @@ qq.on("message", (message: Message) => {
   const argumentCount = args.length;
 
   if (argumentCount === 0) {
-    const maleFirstNames = buildNameList("../resources/archaic.male.names.json");
-    const femaleFirstNames = buildNameList("../resources/archaic.female.names.json");
+    const maleFirstNames = buildNameListText("../resources/human.male.names.json");
+    const femaleFirstNames = buildNameListText("../resources/human.female.names.json");
 
     message.channel.send(`Male human names: ${maleFirstNames}`);
     message.channel.send(`Female human names: ${femaleFirstNames}`);
