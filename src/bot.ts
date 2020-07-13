@@ -28,8 +28,6 @@ qq.once("ready", () => {
   console.log("Howdy boss! Quick-quick Gnome Lackey at your service.");
 });
 
-console.log(process.env.DISCORD_BOT_SECRET);
-
 qq.login(process.env.DISCORD_BOT_SECRET);
 
 qq.on("message", (message: Message) => {
