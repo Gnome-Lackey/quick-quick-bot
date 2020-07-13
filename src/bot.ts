@@ -25,11 +25,42 @@ qq.on("message", (message: Message) => {
   const argumentCount = args.length;
 
   if (argumentCount === 0) {
-    const maleFirstNames = QQUtility.buildNameListText("../resources/human.male.names.json");
-    const femaleFirstNames = QQUtility.buildNameListText("../resources/human.female.names.json");
+    const dwarfFemaleFirstNames = QQUtility.buildNameListText("../resources/dwarf.female.names.json");
+    const dwarfMaleFirstNames = QQUtility.buildNameListText("../resources/dwarf.male.names.json");
+    const elfFemaleFirstNames = QQUtility.buildNameListText("../resources/elf.female.names.json");
+    const elfMaleFirstNames = QQUtility.buildNameListText("../resources/elf.male.names.json");
+    const gnomeFemaleFirstNames = QQUtility.buildNameListText("../resources/gnome.female.names.json");
+    const gnomeMaleFirstNames = QQUtility.buildNameListText("../resources/gnome.male.names.json");
+    const halflingFemaleFirstNames = QQUtility.buildNameListText("../resources/halfling.female.names.json");
+    const halflingMaleFirstNames = QQUtility.buildNameListText("../resources/halfling.male.names.json");
+    const humanFemaleFirstNames = QQUtility.buildNameListText("../resources/human.female.names.json", "all");
+    const humanMaleFirstNames = QQUtility.buildNameListText("../resources/human.male.names.json", "all");
+    const orcFemaleFirstNames = QQUtility.buildNameListText("../resources/orc.female.names.json");
+    const orcMaleFirstNames = QQUtility.buildNameListText("../resources/orc.male.names.json");
+    const tieflingFemaleFirstNames = QQUtility.buildNameListText("../resources/tiefling.female.names.json");
+    const tieflingMaleFirstNames = QQUtility.buildNameListText("../resources/tiefling.male.names.json");
 
-    message.channel.send(`Male human names: ${maleFirstNames}`);
-    message.channel.send(`Female human names: ${femaleFirstNames}`);
+    message.channel.send(`
+      *Female Names:*
+      **Dwarf names:** ${dwarfFemaleFirstNames}
+      **Elf names:** ${elfFemaleFirstNames}
+      **Gnome names:** ${gnomeFemaleFirstNames}
+      **Halfling names:** ${halflingFemaleFirstNames}
+      **Human names:** ${humanFemaleFirstNames}
+      **Orc names:** ${orcFemaleFirstNames}
+      **Tiefling names:** ${tieflingFemaleFirstNames}
+    `)
+
+    message.channel.send(`
+      *Male Names:*
+      **Dwarf names:** ${dwarfMaleFirstNames}
+      **Elf names:** ${elfMaleFirstNames}
+      **Gnome names:** ${gnomeMaleFirstNames}
+      **Halfling names:** ${halflingMaleFirstNames}
+      **Human names:** ${humanMaleFirstNames}
+      **Orc names:** ${orcMaleFirstNames}
+      **Tiefling names:** ${tieflingMaleFirstNames}
+    `)
   }
 });
 
