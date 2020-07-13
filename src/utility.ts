@@ -13,11 +13,11 @@ export default class QQUtility {
       }
     }
 
-    const nonMessageTextRegex = /["[\]]/g;
+    const arrayStyleTextRegex = /["[\]]/g;
+    const arrayStyleDelimiterRegex = /[,]/g;
 
     return JSON.stringify(names)
-      .replace(nonMessageTextRegex, "")
-      .split(",")
-      .join(", ");
+      .replace(arrayStyleTextRegex, "")
+      .replace(arrayStyleDelimiterRegex, ", ");
   }
 }
