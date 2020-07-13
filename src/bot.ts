@@ -1,34 +1,14 @@
 import { Client, Message } from "discord.js";
 
+import QQUtility from "./utility";
+
 const qq = new Client();
 
 const qqCommandRegex = /^qq!/;
 
-function buildNameListText(filePath: string): string {
-  const listOfNames: string[] = require(filePath);
-  const nameCount = listOfNames.length;
-
-  const names: string[] = [];
-  while (names.length < 3) {
-    const randomIndex = Math.floor(Math.random() * nameCount);
-    const name = listOfNames[randomIndex];
-
-    if (!names.includes(name)) {
-      names.push(name);
-    }
-  }
-
-  const listString = JSON.stringify(names);
-  const messageText = listString.replace(/["[\]]/g, "").split(",").join(", ")
-
-  return messageText;
-}
-
 qq.once("ready", () => {
   console.log("Howdy boss! Quick-quick Gnome Lackey at your service.");
 });
-
-qq.login(process.env.DISCORD_BOT_SECRET);
 
 qq.on("message", (message: Message) => {
   const text = message.content;
@@ -45,10 +25,12 @@ qq.on("message", (message: Message) => {
   const argumentCount = args.length;
 
   if (argumentCount === 0) {
-    const maleFirstNames = buildNameListText("../resources/human.male.names.json");
-    const femaleFirstNames = buildNameListText("../resources/human.female.names.json");
+    const maleFirstNames = QQUtility.buildNameListText("../resources/human.male.names.json");
+    const femaleFirstNames = QQUtility.buildNameListText("../resources/human.female.names.json");
 
     message.channel.send(`Male human names: ${maleFirstNames}`);
     message.channel.send(`Female human names: ${femaleFirstNames}`);
   }
 });
+
+qq.login(process.env.DISCORD_BOT_SECRET);

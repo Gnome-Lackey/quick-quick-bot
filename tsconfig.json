@@ -9,6 +9,6 @@
     "target": "es6",
     "moduleResolution": "node"
   },
-  "files": ["./src/bot.ts"],
+  "files": ["./src/bot.ts", "./src/utility.ts"],
   "exclude": ["node_modules"]
 }
