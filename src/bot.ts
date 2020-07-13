@@ -55,7 +55,7 @@ qq.on("message", (message: Message) => {
       **Orc names:** ${orcFemaleFirstNames}
       **Smash names:** ${smashFemaleFirstNames}
       **Tiefling names:** ${tieflingFemaleFirstNames}
-    `)
+    `);
 
     message.channel.send(`
       *Male Names:*
@@ -68,7 +68,7 @@ qq.on("message", (message: Message) => {
       **Orc names:** ${orcMaleFirstNames}
       **Smash names:** ${smashMaleFirstNames}
       **Tiefling names:** ${tieflingMaleFirstNames}
-    `)
+    `);
   }
 });
 

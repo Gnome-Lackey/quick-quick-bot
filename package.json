@@ -4,7 +4,7 @@
   "description": "The trusted quick-quick gnome lackey is a bot to aid all DMs and GMs when they need to think of something on the spot.",
   "main": "./build/main.bundle.js",
   "scripts": {
-    "start": "node ./build/bot.js",
+    "start": "yarn lint && yarn build && node ./build/bot.js",
     "build": "tsc -p tsconfig.json",
     "lint": "eslint --ext .ts src/"
   },
@@ -40,6 +40,7 @@
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "clean-webpack-plugin": "^3.0.0",
     "eslint": "^7.4.0",
+    "eslint-plugin-filenames": "^1.3.2",
     "prettier": "^1.18",
     "source-map": "^0.7.3"
   }
