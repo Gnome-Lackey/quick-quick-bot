@@ -1,7 +1,6 @@
 import { exception } from "console";
 
-import { HumanGenders, HumanLanguages, HumanNames } from "./models/human";
-import { NameList } from "./models/name";
+import { Genders, HumanLanguages, HumanNames, NameList, NonHumanRaces } from "./types";
 
 export default class QQUtility {
   private DEFAULT_LANGUAGE: HumanLanguages = "english";
@@ -36,7 +35,7 @@ export default class QQUtility {
 
   buildHumanNames(
     count: number,
-    gender: HumanGenders,
+    gender: Genders,
     language: HumanLanguages = this.DEFAULT_LANGUAGE
   ): string {
     const firstNames: HumanNames = require(`../resources/human.${gender.toLowerCase()}.names.json`);
@@ -44,6 +43,13 @@ export default class QQUtility {
 
     const lastNames: HumanNames = require("../resources/human.surnames.json");
     const lastNamePool: NameList = lastNames[language];
+
+    return this.generateRandomNames(firstNamePool, lastNamePool, count);
+  }
+
+  buildNonHumanNames(count: number, gender: Genders, race: NonHumanRaces): string {
+    const firstNamePool: NameList = require(`../resources/${race.toLowerCase()}.${gender.toLowerCase()}.names.json`);
+    const lastNamePool: NameList = require(`../resources/${race.toLowerCase()}.surnames.json`);
 
     return this.generateRandomNames(firstNamePool, lastNamePool, count);
   }
