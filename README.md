@@ -46,12 +46,14 @@ If you need something more specific, there are a number of arguments that you ca
 To use these arguments just add the value after the command, like so:
 
 ```text
-qq! dragonborn male 2
+qq! gnome female 2
 ```
 
 This will give you something like the following:
 
 ```text
 I'm on it boss!
-Dragonborn Names: Pandjed Argenthrixus, Srorthen Hshhsstoroth
+Gnome Names:
+    Zanna Musgraben,
+    Oda Fabblestabble
 ```
