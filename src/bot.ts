@@ -1,10 +1,35 @@
 import { Client, Message } from "discord.js";
 
-import QQUtility from "./utility";
+import NameUtility from "./name.utility";
+
+import { Race, Language, Gender } from "./types";
 
 const qq = new Client();
+const nameUtility = new NameUtility();
 
-const qqCommandRegex = /^qq!/;
+const COMMAND_PREFIX = "qq!";
+const COMMAND_PREFIX_REGEX = /^qq!/;
+
+const RACES = ["Dragonborn", "Dwarf", "Elf", "Gnome", "Halfling", "Human", "Orc", "Tiefling"];
+const GENDERS = ["male", "female"];
+const LANGUAGES = [
+  "african",
+  "celtic",
+  "chinese",
+  "egyption",
+  "english",
+  "french",
+  "german",
+  "greek",
+  "indian",
+  "japanese",
+  "mesoamerican",
+  "norse",
+  "polynesian",
+  "roman",
+  "slavic",
+  "spanish"
+];
 
 qq.once("ready", () => {
   console.log("Howdy boss! Quick-quick Gnome Lackey at your service.");
@@ -13,62 +38,51 @@ qq.once("ready", () => {
 qq.on("message", (message: Message) => {
   const text = message.content;
 
-  if (!qqCommandRegex.test(text)) {
+  if (!COMMAND_PREFIX_REGEX.test(text)) {
     // Ignore commands that don't begin with the quick-quick command.
     return;
   }
 
   message.channel.send(`I'm on it boss!`);
 
-  const [, argumentList] = text.split("qq!");
+  const [, argumentList] = text.split(COMMAND_PREFIX);
   const args = argumentList.split(" ").filter((arg) => !!arg);
   const argumentCount = args.length;
 
   if (argumentCount === 0) {
-    const dragonbornFemaleFirstNames = QQUtility.buildNameListText("../resources/dragonborn.female.names.json");
-    const dragonbornMaleFirstNames = QQUtility.buildNameListText("../resources/dragonborn.male.names.json");
-    const dwarfFemaleFirstNames = QQUtility.buildNameListText("../resources/dwarf.female.names.json");
-    const dwarfMaleFirstNames = QQUtility.buildNameListText("../resources/dwarf.male.names.json");
-    const elfFemaleFirstNames = QQUtility.buildNameListText("../resources/elf.female.names.json");
-    const elfMaleFirstNames = QQUtility.buildNameListText("../resources/elf.male.names.json");
-    const gnomeFemaleFirstNames = QQUtility.buildNameListText("../resources/gnome.female.names.json");
-    const gnomeMaleFirstNames = QQUtility.buildNameListText("../resources/gnome.male.names.json");
-    const halflingFemaleFirstNames = QQUtility.buildNameListText("../resources/halfling.female.names.json");
-    const halflingMaleFirstNames = QQUtility.buildNameListText("../resources/halfling.male.names.json");
-    const humanFemaleFirstNames = QQUtility.buildNameListText("../resources/human.female.names.json", "all");
-    const humanMaleFirstNames = QQUtility.buildNameListText("../resources/human.male.names.json", "all");
-    const orcFemaleFirstNames = QQUtility.buildNameListText("../resources/orc.female.names.json");
-    const orcMaleFirstNames = QQUtility.buildNameListText("../resources/orc.male.names.json");
-    const smashFemaleFirstNames = QQUtility.buildNameListText("../resources/smash.female.names.json");
-    const smashMaleFirstNames = QQUtility.buildNameListText("../resources/smash.male.names.json");
-    const tieflingFemaleFirstNames = QQUtility.buildNameListText("../resources/tiefling.female.names.json");
-    const tieflingMaleFirstNames = QQUtility.buildNameListText("../resources/tiefling.male.names.json");
+    const femaleNameMessage = RACES.reduce(
+      (fullText, race: Race) => `${fullText}
+      **${race}:** ${nameUtility.generateNamesForRace(race, "female")}`,
+      `*Female Names:*`
+    );
 
-    message.channel.send(`
-      *Female Names:*
-      **Dragonborn names:** ${dragonbornFemaleFirstNames}
-      **Dwarf names:** ${dwarfFemaleFirstNames}
-      **Elf names:** ${elfFemaleFirstNames}
-      **Gnome names:** ${gnomeFemaleFirstNames}
-      **Halfling names:** ${halflingFemaleFirstNames}
-      **Human names:** ${humanFemaleFirstNames}
-      **Orc names:** ${orcFemaleFirstNames}
-      **Smash names:** ${smashFemaleFirstNames}
-      **Tiefling names:** ${tieflingFemaleFirstNames}
-    `);
+    const maleNameMessage = RACES.reduce(
+      (fullText, race: Race) => `${fullText}
+      **${race}:** ${nameUtility.generateNamesForRace(race, "male")}`,
+      `*Male Names:*`
+    );
 
-    message.channel.send(`
-      *Male Names:*
-      **Dragonborn names:** ${dragonbornMaleFirstNames}
-      **Dwarf names:** ${dwarfMaleFirstNames}
-      **Elf names:** ${elfMaleFirstNames}
-      **Gnome names:** ${gnomeMaleFirstNames}
-      **Halfling names:** ${halflingMaleFirstNames}
-      **Human names:** ${humanMaleFirstNames}
-      **Orc names:** ${orcMaleFirstNames}
-      **Smash names:** ${smashMaleFirstNames}
-      **Tiefling names:** ${tieflingMaleFirstNames}
-    `);
+    message.channel.send(femaleNameMessage);
+    message.channel.send(maleNameMessage);
+  } else {
+    let language: Language;
+
+    const race = RACES.find((nextRace) => args.includes(nextRace.toLowerCase())) as Race;
+    const gender = GENDERS.find((nextGender) => args.includes(nextGender.toLowerCase())) as Gender;
+    const count = parseInt(args.find((arg) => /^[0-9]$/.test(arg))) || 1;
+
+    if (race.toLowerCase() === "human") {
+      language = LANGUAGES.find((nextLang) => args.includes(nextLang.toLowerCase())) as Language;
+    }
+
+    const fullMessage = gender
+      ? `**${race} Names:** ${nameUtility.generateNamesForRace(race, gender, language, count)}`
+      : `
+        **${race} Names:**
+      *Female Names:* ${nameUtility.generateNamesForRace(race, "female", language, count)}
+      *Male Names:* ${nameUtility.generateNamesForRace(race, "male", language, count)}`;
+
+    message.channel.send(fullMessage);
   }
 });
 
