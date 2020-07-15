@@ -2,7 +2,7 @@ import { Client, Message } from "discord.js";
 
 import NameUtility from "./name.utility";
 
-import { Race } from "./types";
+import { Race, Language, Gender } from "./types";
 
 const qq = new Client();
 const nameUtility = new NameUtility();
@@ -10,35 +10,26 @@ const nameUtility = new NameUtility();
 const COMMAND_PREFIX = "qq!";
 const COMMAND_PREFIX_REGEX = /^qq!/;
 
-const NON_HUMAN_RACES = [
-  "Dragonborn",
-  "Dwarf",
-  "Elf",
-  "Gnome",
-  "Halfling",
-  "Human",
-  "Orc",
-  "Tiefling"
+const RACES = ["Dragonborn", "Dwarf", "Elf", "Gnome", "Halfling", "Human", "Orc", "Tiefling"];
+const GENDERS = ["male", "female"];
+const LANGUAGES = [
+  "african",
+  "celtic",
+  "chinese",
+  "egyption",
+  "english",
+  "french",
+  "german",
+  "greek",
+  "indian",
+  "japanese",
+  "mesoamerican",
+  "norse",
+  "polynesian",
+  "roman",
+  "slavic",
+  "spanish"
 ];
-
-// const LANGUAGES = [
-//   "african",
-//   "celtic",
-//   "chinese",
-//   "egyption",
-//   "english",
-//   "french",
-//   "german",
-//   "greek",
-//   "indian",
-//   "japanese",
-//   "mesoamerican",
-//   "norse",
-//   "polynesian",
-//   "roman",
-//   "slavic",
-//   "spanish"
-// ];
 
 qq.once("ready", () => {
   console.log("Howdy boss! Quick-quick Gnome Lackey at your service.");
@@ -59,13 +50,13 @@ qq.on("message", (message: Message) => {
   const argumentCount = args.length;
 
   if (argumentCount === 0) {
-    const femaleNameMessage = NON_HUMAN_RACES.reduce(
+    const femaleNameMessage = RACES.reduce(
       (fullText, race: Race) => `${fullText}
       **${race}:** ${nameUtility.generateNamesForRace(race, "female")}`,
       `*Female Names:*`
     );
 
-    const maleNameMessage = NON_HUMAN_RACES.reduce(
+    const maleNameMessage = RACES.reduce(
       (fullText, race: Race) => `${fullText}
       **${race}:** ${nameUtility.generateNamesForRace(race, "male")}`,
       `*Male Names:*`
@@ -74,8 +65,24 @@ qq.on("message", (message: Message) => {
     message.channel.send(femaleNameMessage);
     message.channel.send(maleNameMessage);
   } else {
-    // const language = args.find((arg) => LANGUAGES.includes(arg));
-    // const race = args.find((arg) => [...NON_HUMAN_RACES, "human"].includes(arg));
+    let language: Language;
+
+    const race = RACES.find((nextRace) => args.includes(nextRace.toLowerCase())) as Race;
+    const gender = GENDERS.find((nextGender) => args.includes(nextGender.toLowerCase())) as Gender;
+    const count = parseInt(args.find((arg) => /^[0-9]$/.test(arg))) || 1;
+
+    if (race.toLowerCase() === "human") {
+      language = LANGUAGES.find((nextLang) => args.includes(nextLang.toLowerCase())) as Language;
+    }
+
+    const fullMessage = gender
+      ? `**${race} Names:** ${nameUtility.generateNamesForRace(race, gender, language, count)}`
+      : `
+        **${race} Names:**
+      *Female Names:* ${nameUtility.generateNamesForRace(race, "female", language, count)}
+      *Male Names:* ${nameUtility.generateNamesForRace(race, "male", language, count)}`;
+
+    message.channel.send(fullMessage);
   }
 });
 
