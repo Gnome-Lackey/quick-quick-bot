@@ -1,12 +1,10 @@
-export type Genders = "male" | "female";
+export type Gender = "male" | "female";
 
-export type NameList = string[];
-
-export type HumanLanguages =
+export type Language =
   | "african"
   | "celtic"
   | "chinese"
-  | "egyption"
+  | "egyptian"
   | "english"
   | "french"
   | "german"
@@ -20,15 +18,12 @@ export type HumanLanguages =
   | "slavic"
   | "spanish";
 
-export interface HumanNames {
-  [language: string]: NameList;
-}
-
-export type NonHumanRaces =
+export type Race =
   | "dragonborn"
   | "dwarf"
   | "elf"
   | "gnome"
   | "halfling"
+  | "human"
   | "orc"
   | "tiefling";

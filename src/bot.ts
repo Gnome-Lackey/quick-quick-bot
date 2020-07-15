@@ -2,14 +2,43 @@ import { Client, Message } from "discord.js";
 
 import NameUtility from "./name.utility";
 
-import { NonHumanRaces } from "./types";
+import { Race } from "./types";
 
 const qq = new Client();
 const nameUtility = new NameUtility();
 
 const COMMAND_PREFIX = "qq!";
 const COMMAND_PREFIX_REGEX = /^qq!/;
-const NON_HUMAN_RACES = ["Dragonborn", "Dwarf", "Elf", "Gnome", "Halfling", "Orc", "Tiefling"];
+
+const NON_HUMAN_RACES = [
+  "Dragonborn",
+  "Dwarf",
+  "Elf",
+  "Gnome",
+  "Halfling",
+  "Human",
+  "Orc",
+  "Tiefling"
+];
+
+// const LANGUAGES = [
+//   "african",
+//   "celtic",
+//   "chinese",
+//   "egyption",
+//   "english",
+//   "french",
+//   "german",
+//   "greek",
+//   "indian",
+//   "japanese",
+//   "mesoamerican",
+//   "norse",
+//   "polynesian",
+//   "roman",
+//   "slavic",
+//   "spanish"
+// ];
 
 qq.once("ready", () => {
   console.log("Howdy boss! Quick-quick Gnome Lackey at your service.");
@@ -31,21 +60,22 @@ qq.on("message", (message: Message) => {
 
   if (argumentCount === 0) {
     const femaleNameMessage = NON_HUMAN_RACES.reduce(
-      (fullText, race) => `${fullText}
-      **${race}:** ${nameUtility.buildNonHumanNames(1, "female", race as NonHumanRaces)}`,
-      `*Female Names:*
-      **Humans:** ${nameUtility.buildHumanNames(1, "female")}`
+      (fullText, race: Race) => `${fullText}
+      **${race}:** ${nameUtility.generateNamesForRace(race, "female")}`,
+      `*Female Names:*`
     );
 
     const maleNameMessage = NON_HUMAN_RACES.reduce(
-      (fullText, race) => `${fullText}
-      **${race}:** ${nameUtility.buildNonHumanNames(1, "male", race as NonHumanRaces)}`,
-      `*Male Names:*
-      **Humans:** ${nameUtility.buildHumanNames(1, "male")}`
+      (fullText, race: Race) => `${fullText}
+      **${race}:** ${nameUtility.generateNamesForRace(race, "male")}`,
+      `*Male Names:*`
     );
 
     message.channel.send(femaleNameMessage);
     message.channel.send(maleNameMessage);
+  } else {
+    // const language = args.find((arg) => LANGUAGES.includes(arg));
+    // const race = args.find((arg) => [...NON_HUMAN_RACES, "human"].includes(arg));
   }
 });
 

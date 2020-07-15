@@ -1,12 +1,13 @@
 import { exception } from "console";
 
-import { Genders, HumanLanguages, HumanNames, NameList, NonHumanRaces } from "./types";
+import { Gender, Language, Race } from "./types";
 
 export default class QQUtility {
-  private DEFAULT_LANGUAGE: HumanLanguages = "english";
+  private DEFAULT_RACE: Race = "human";
+  private DEFAULT_LANGUAGE: Language = "english";
 
-  private generateNameList(pool: NameList, count: number): NameList {
-    const names: NameList = [];
+  private generateNameList(pool: string[], count: number): string[] {
+    const names: string[] = [];
     const poolSize = pool.length;
 
     while (names.length < count) {
@@ -21,7 +22,7 @@ export default class QQUtility {
     return names;
   }
 
-  generateRandomNames(firstNamePool: NameList, lastNamePool: NameList, count: number): string {
+  generateRandomNames(firstNamePool: string[], lastNamePool: string[], count: number): string {
     if (firstNamePool.length * lastNamePool.length < count)
       throw exception("Name pool is smaller than the number of desired names.");
 
@@ -33,23 +34,27 @@ export default class QQUtility {
     return fullNames.join(", ");
   }
 
-  buildHumanNames(
-    count: number,
-    gender: Genders,
-    language: HumanLanguages = this.DEFAULT_LANGUAGE
+  generateNamesForRace(
+    race: Race,
+    gender: Gender,
+    language: Language = this.DEFAULT_LANGUAGE,
+    count = 1
   ): string {
-    const firstNames: HumanNames = require(`../resources/human.${gender.toLowerCase()}.names.json`);
-    const firstNamePool: NameList = firstNames[language];
+    const parsedRace = race.toLowerCase();
+    const parsedLanguage = language.toLowerCase();
+    const parsedGender = gender.toLowerCase();
+    const isHuman = parsedRace === this.DEFAULT_RACE;
 
-    const lastNames: HumanNames = require("../resources/human.surnames.json");
-    const lastNamePool: NameList = lastNames[language];
+    const firstNameFilePath = isHuman
+      ? `../resources/${parsedRace}.${parsedGender}.${parsedLanguage}.names.json`
+      : `../resources/${parsedRace}.${parsedGender}.names.json`;
 
-    return this.generateRandomNames(firstNamePool, lastNamePool, count);
-  }
+    const lastNameFilePath = isHuman
+      ? `../resources/${parsedRace}.${parsedLanguage}.surnames.json`
+      : `../resources/${parsedRace}.surnames.json`;
 
-  buildNonHumanNames(count: number, gender: Genders, race: NonHumanRaces): string {
-    const firstNamePool: NameList = require(`../resources/${race.toLowerCase()}.${gender.toLowerCase()}.names.json`);
-    const lastNamePool: NameList = require(`../resources/${race.toLowerCase()}.surnames.json`);
+    const firstNamePool: string[] = require(firstNameFilePath);
+    const lastNamePool: string[] = require(lastNameFilePath);
 
     return this.generateRandomNames(firstNamePool, lastNamePool, count);
   }
