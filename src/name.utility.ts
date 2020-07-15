@@ -49,18 +49,15 @@ export default class QQUtility {
     language: Language = LANGUAGE_DEFAULT,
     count = 1
   ): string {
-    const parsedRace = race.toLowerCase();
-    const parsedLanguage = language.toLowerCase();
-    const parsedGender = gender.toLowerCase();
-    const isHuman = parsedRace === RACE_HUMAN;
+    const isHuman = race === RACE_HUMAN;
 
     const firstNameFilePath = isHuman
-      ? `../resources/${parsedRace}.${parsedGender}.${parsedLanguage}.names.json`
-      : `../resources/${parsedRace}.${parsedGender}.names.json`;
+      ? `../resources/${race}.${gender}.${language}.names.json`
+      : `../resources/${race}.${gender}.names.json`;
 
     const lastNameFilePath = isHuman
-      ? `../resources/${parsedRace}.${parsedLanguage}.surnames.json`
-      : `../resources/${parsedRace}.surnames.json`;
+      ? `../resources/${race}.${language}.surnames.json`
+      : `../resources/${race}.surnames.json`;
 
     const firstNamePool: string[] = require(firstNameFilePath);
     const lastNamePool: string[] = require(lastNameFilePath);
