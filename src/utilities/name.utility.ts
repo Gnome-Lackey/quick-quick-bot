@@ -1,16 +1,14 @@
 import { exception } from "console";
 
-import { Gender, Language, Race } from "./types";
+import QQUtility from "./qq.utility";
 
-import { LANGUAGE_DEFAULT, RACE_HUMAN, RACES, GENDER_FEMALE, GENDER_MALE } from "./constants";
+import { Gender, Language, Race } from "../types";
 
-export default class QQUtility {
-  private toProperNoun(text: string): string {
-    const firstLetter = text.charAt(0).toUpperCase();
+import { RACE_HUMAN, RACES } from "../constants/race.constants";
+import { LANGUAGE_DEFAULT } from "../constants/language.constants";
+import { GENDER_FEMALE, GENDER_MALE } from "../constants/gender.constants";
 
-    return `${firstLetter}${text.slice(1)}`;
-  }
-
+export default class NameUtility extends QQUtility {
   private getRandomNamesFrom(pool: string[], count: number): string[] {
     const names: string[] = [];
     const poolSize = pool.length;
@@ -43,7 +41,7 @@ export default class QQUtility {
     return fullNames.join(",\n\t");
   }
 
-  private generateNamesWith(
+  public generateNamesWith(
     race: Race,
     gender: Gender,
     language: Language = LANGUAGE_DEFAULT,
@@ -65,7 +63,7 @@ export default class QQUtility {
     return this.buildRandomFullNamesFrom(firstNamePool, lastNamePool, count);
   }
 
-  generateSpecificMessage(
+  public generateSpecificMessage(
     race: Race,
     gender: Gender,
     language: Language = LANGUAGE_DEFAULT,
@@ -88,7 +86,7 @@ export default class QQUtility {
         )}`;
   }
 
-  generateDefaultMessage(): string {
+  public generateDefaultMessage(): string {
     const femaleNameMessage = RACES.reduce(
       (fullText, race: Race) => `${fullText}
       **${this.toProperNoun(race)}:** ${this.generateNamesWith(race, GENDER_FEMALE)}`,
