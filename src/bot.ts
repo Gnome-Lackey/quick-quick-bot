@@ -1,17 +1,23 @@
-import { Client, Message } from "discord.js";
+import { Client as DiscordClient, Message } from "discord.js";
 
-import CommandClient from "./command.client";
+import QQClient from "./client";
 
-const qq = new Client();
+const bot = new DiscordClient();
+const client = new QQClient();
 
-qq.once("ready", () => {
-  console.log("Howdy boss! Quick-quick Gnome Lackey at your service.");
+bot.once("ready", () => {
+  console.log("Howdy boss! Quick-Quick gnome lackey at your service.");
 });
 
-qq.on("message", (message: Message) => {
-  const commandClient = new CommandClient(message);
+bot.on("message", (message: Message) => {
+  if (message.author.bot) {
+    // Ignore messages coming from bots. This also avoids qq talking to itself infinitely.
+    return;
+  }
 
-  commandClient.exec();
+  const fullMessage = client.exec(message.content);
+
+  message.channel.send(fullMessage);
 });
 
-qq.login(process.env.DISCORD_BOT_SECRET);
+bot.login(process.env.DISCORD_BOT_SECRET);

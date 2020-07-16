@@ -1,8 +1,8 @@
-import QQUtility from "./qq.utility";
+import { toProperNoun } from "../utilities/qq.utility";
 
 import { Gender, Race } from "../types";
 
-export default class NPCUtility extends QQUtility {
+export default class NPCUtility {
   private getRandomCharacteristicFrom(pool: string[]): string {
     const poolSize = pool.length;
     const randomIndex = Math.floor(Math.random() * poolSize);
@@ -32,13 +32,13 @@ export default class NPCUtility extends QQUtility {
   }
 
   public generateMessage(name: string, race: Race, gender: Gender): string {
-    const parsedRace = this.toProperNoun(race);
+    const parsedRace = toProperNoun(race);
 
-    const bondPool = require("../resources/backgrounds.bonds.json");
-    const flawPool = require("../resources/backgrounds.flaws.json");
-    const idealPool = require("../resources/backgrounds.ideals.json");
-    const titlePool = require("../resources/backgrounds.titles.json");
-    const traitPool = require("../resources/backgrounds.traits.json");
+    const bondPool = require("../../resources/backgrounds.bonds.json");
+    const flawPool = require("../../resources/backgrounds.flaws.json");
+    const idealPool = require("../../resources/backgrounds.ideals.json");
+    const titlePool = require("../../resources/backgrounds.titles.json");
+    const traitPool = require("../../resources/backgrounds.traits.json");
 
     const bond = this.getRandomCharacteristicFrom(bondPool);
     const flaw = this.getRandomCharacteristicFrom(flawPool);

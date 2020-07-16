@@ -11,9 +11,9 @@
   },
   "files": [
     "src/bot.ts",
-    "src/command.client.ts",
-    "src/utilities/name.utility.ts",
-    "src/utilities/npc.utility.ts",
+    "src/client.ts",
+    "src/commands/name.command.ts",
+    "src/commands/npc.command.ts",
     "src/utilities/qq.utility.ts",
     "src/constants/command.constants.ts",
     "src/constants/gender.constants.ts",

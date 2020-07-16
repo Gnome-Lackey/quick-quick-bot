@@ -1,6 +1,6 @@
 import { exception } from "console";
 
-import QQUtility from "./qq.utility";
+import { toProperNoun } from "../utilities/qq.utility";
 
 import { Gender, Language, Race } from "../types";
 
@@ -8,7 +8,7 @@ import { RACE_HUMAN, RACES } from "../constants/race.constants";
 import { LANGUAGE_DEFAULT } from "../constants/language.constants";
 import { GENDER_FEMALE, GENDER_MALE } from "../constants/gender.constants";
 
-export default class NameUtility extends QQUtility {
+export default class NameUtility {
   private getRandomNamesFrom(pool: string[], count: number): string[] {
     const names: string[] = [];
     const poolSize = pool.length;
@@ -50,12 +50,12 @@ export default class NameUtility extends QQUtility {
     const isHuman = race === RACE_HUMAN;
 
     const firstNameFilePath = isHuman
-      ? `../resources/${race}.${gender}.${language}.names.json`
-      : `../resources/${race}.${gender}.names.json`;
+      ? `../../resources/${race}.${gender}.${language}.names.json`
+      : `../../resources/${race}.${gender}.names.json`;
 
     const lastNameFilePath = isHuman
-      ? `../resources/${race}.${language}.surnames.json`
-      : `../resources/${race}.surnames.json`;
+      ? `../../resources/${race}.${language}.surnames.json`
+      : `../../resources/${race}.surnames.json`;
 
     const firstNamePool: string[] = require(firstNameFilePath);
     const lastNamePool: string[] = require(lastNameFilePath);
@@ -69,7 +69,7 @@ export default class NameUtility extends QQUtility {
     language: Language = LANGUAGE_DEFAULT,
     count = 1
   ): string {
-    const properRace = this.toProperNoun(race);
+    const properRace = toProperNoun(race);
 
     return gender
       ? `**${properRace} Names:**\n\t${this.generateNamesWith(race, gender, language, count)}`
@@ -89,13 +89,13 @@ export default class NameUtility extends QQUtility {
   public generateDefaultMessage(): string {
     const femaleNameMessage = RACES.reduce(
       (fullText, race: Race) => `${fullText}
-      **${this.toProperNoun(race)}:** ${this.generateNamesWith(race, GENDER_FEMALE)}`,
+      **${toProperNoun(race)}:** ${this.generateNamesWith(race, GENDER_FEMALE)}`,
       `*Female Names:*`
     );
 
     const maleNameMessage = RACES.reduce(
       (fullText, race: Race) => `${fullText}
-      **${this.toProperNoun(race)}:** ${this.generateNamesWith(race, GENDER_MALE)}`,
+      **${toProperNoun(race)}:** ${this.generateNamesWith(race, GENDER_MALE)}`,
       `*Male Names:*`
     );
 
