@@ -71,7 +71,7 @@ There is of course the option of just cloning the code on any computer, and havi
 
 What ever path you take, you'll first need to fork and clone this repo. We prefer that people fork the repo so that they can make any custom changes to their copy of the code, and keep the main repo clean. If that person wants to then add that code to the main repo they can create a PR with their fork pointing to our branch. See the section below on submitting a PR.
 
-Once you have the code cloned, in the environment you chose, you'll need to install the dependencies. We use _yarn_ as our package manager, so if you don't have yarn you'll need to ![install](https://classic.yarnpkg.com/en/docs/install) it. If you hate yarn for some reason you can also use _npm_. Once your package manager is ready, you can install the dependencies by first navigating to the root directory of the project in your favorite terminal, and then running one of the following commands:
+Once you have the code cloned, in the environment you chose, you'll need to install the dependencies. We use _yarn_ as our package manager, so if you don't have yarn you'll need to [install](https://classic.yarnpkg.com/en/docs/install) it. If you hate yarn for some reason you can also use _npm_. Once your package manager is ready, you can install the dependencies by first navigating to the root directory of the project in your favorite terminal, and then running one of the following commands:
 
 ### Install Dependencies using yarn
 
@@ -85,7 +85,7 @@ yarn
 npm i
 ```
 
-Now that you have all the dependencies (hopefully), you'll then have to create a bot application on discord. _Discord.js_ has an awesome tutorial on how to do this ![here](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot). Just follow the instructions there. Then come back here. Don't worry we'll be waiting.
+Now that you have all the dependencies (hopefully), you'll then have to create a bot application on discord. _Discord.js_ has an awesome tutorial on how to do this [here](https://discordjs.guide/preparations/setting-up-a-bot-application.html#creating-your-bot). Just follow the instructions there. Then come back here. Don't worry we'll be waiting.
 
 Once you're done creating the application for discord you should have a `client_id`. In order to run the bot locally you'll need to add the `client_id` to your system's environment. To do so, run one of the following commands in your terminal:
 
@@ -147,7 +147,7 @@ Howdy boss! Quick-Quick gnome lackey at your service.
 
 If you navigate over to your discord server you should see _quick-quick_ in your server's channels. Be sure to lock down the permissions of the channels you don't want him to join!
 
-Hopefully, quick-quick does his work well. If he's acting up please make a formal complaint ![here](https://github.com/Gnome-Lackey/quick-quick-bot/issues) specifying the commands issued, the responses (or lack there of) received, and the desired outcome you expected.
+Hopefully, quick-quick does his work well. If he's acting up please make a formal complaint [here](https://github.com/Gnome-Lackey/quick-quick-bot/issues) specifying the commands issued, the responses (or lack there of) received, and the desired outcome you expected.
 
 ## Contributing to the Project
 
