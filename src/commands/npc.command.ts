@@ -4,19 +4,19 @@ import { toProperNoun } from "../utilities/qq.utility";
 
 import { Gender, Race, BackgroundCharacteristic, BackgroundIdeal, Ideal } from "../types";
 
-import { MESSAGE_COLOR, MESSAGE_TITLE, MESSAGE_FOOTER } from "src/constants/message.constants";
+import { MESSAGE_COLOR, MESSAGE_TITLE, MESSAGE_FOOTER } from "../constants/message.constants";
 import {
   ALIGNMENT_DEFAULT,
   ALIGNMENT_ATTITUDES,
   ALIGNMENT_MORALITIES
-} from "src/constants/alignment.constants";
+} from "../constants/alignment.constants";
 
 export default class NPCUtility {
   private buildEmbedMessage(name: string, fields: EmbedFieldData[]): MessageEmbed {
     return new MessageEmbed()
       .setColor(MESSAGE_COLOR)
       .setTitle(MESSAGE_TITLE)
-      .setDescription(`Hey Boss! I'd like to introduce you to *${name}!*`)
+      .setDescription(`Hey Boss! I'd like to introduce you to *${name}*`)
       .addFields(fields)
       .setTimestamp()
       .setFooter(MESSAGE_FOOTER);
@@ -111,12 +111,13 @@ export default class NPCUtility {
         ].join("\n")
       },
       {
-        name: `Background - ${title}`,
+        name: "Background",
         value: [
-          `Bond: ${bond}`,
-          `Flaw: ${flaw}`,
-          `Ideal: *(${idealName})* ${idealDescription}`,
-          `Trait: ${trait}`
+          `\n__Type__\n${title}`,
+          `\n__Bond__\n${bond}`,
+          `\n__Flaw__\n${flaw}`,
+          `\n__Ideal__ *(${idealName})*\n${idealDescription}`,
+          `\n__Trait__\n${trait}`
         ].join("\n")
       }
     ];
