@@ -1,5 +1,11 @@
 export const toProperNoun = (text: string): string => {
-  const firstLetter = text.charAt(0).toUpperCase();
+  const words = text.split(" ");
 
-  return `${firstLetter}${text.slice(1)}`;
+  return words
+    .reduce((properNouns, word) => {
+      const firstLetter = word.charAt(0).toUpperCase();
+
+      return [...properNouns, `${firstLetter}${word.slice(1)}`];
+    }, [])
+    .join(" ");
 };

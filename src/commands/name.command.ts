@@ -50,12 +50,12 @@ export default class NameUtility {
     const isHuman = race === RACE_HUMAN;
 
     const firstNameFilePath = isHuman
-      ? `../../resources/${race}.${gender}.${language}.names.json`
-      : `../../resources/${race}.${gender}.names.json`;
+      ? `../../resources/names/${race}.${gender}.${language}.names.json`
+      : `../../resources/names/${race}.${gender}.names.json`;
 
     const lastNameFilePath = isHuman
-      ? `../../resources/${race}.${language}.surnames.json`
-      : `../../resources/${race}.surnames.json`;
+      ? `../../resources/surnames/${race}.${language}.surnames.json`
+      : `../../resources/surnames/${race}.surnames.json`;
 
     const firstNamePool: string[] = require(firstNameFilePath);
     const lastNamePool: string[] = require(lastNameFilePath);
