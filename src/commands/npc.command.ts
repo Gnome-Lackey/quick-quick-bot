@@ -1,8 +1,19 @@
 import { toProperNoun } from "../utilities/qq.utility";
 
 import { Gender, Race, BackgroundCharacteristic, BackgroundIdeal, Ideal } from "../types";
+import { EmbedFieldData, MessageEmbed } from "discord.js";
 
 export default class NPCUtility {
+  private buildEmbedMessage(name: string, fields: EmbedFieldData[]): MessageEmbed {
+    return new MessageEmbed()
+      .setColor("#0099ff")
+      .setTitle("Quick-Quick Results")
+      .setDescription(`Hey Boss! I'd like to introduce you to *${name}!*`)
+      .addFields(fields)
+      .setTimestamp()
+      .setFooter("\u00a9 | Gnome Lackey");
+  }
+
   private getRandomCharacteristicFrom(pool: string[] | Ideal[]): string | Ideal {
     const poolSize = pool.length;
     const randomIndex = Math.floor(Math.random() * poolSize);
@@ -41,7 +52,7 @@ export default class NPCUtility {
     }
   }
 
-  public generateMessage(name: string, race: Race, gender: Gender): string {
+  public generateMessage(name: string, race: Race, gender: Gender): MessageEmbed {
     const parsedRace = toProperNoun(race);
     const parsedGender = toProperNoun(gender);
 
@@ -70,33 +81,37 @@ export default class NPCUtility {
     const charisma = this.generateRandomAbilityScore();
     const constitution = this.generateRandomAbilityScore();
 
-    return `
-    Here you go boss! Meet **${name}**
+    const fields = [
+      {
+        name: "Characteristics",
+        value: [
+          `Race: ${parsedRace}`,
+          `Gender: ${parsedGender}`,
+          `Alignment: ${parsedAlignment}`
+        ].join("\n")
+      },
+      {
+        name: "Ability Scores",
+        value: [
+          `Wisdom: ${wisdom}`,
+          `Dexterity: ${dexterity}`,
+          `Strength: ${strength}`,
+          `Intelligence: ${intelligence}`,
+          `Charisma: ${charisma}`,
+          `Constitution: ${constitution}`
+        ].join("\n")
+      },
+      {
+        name: `Background - ${title}`,
+        value: [
+          `Bond: ${bond}`,
+          `Flaw: ${flaw}`,
+          `Ideal: *(${idealName})* ${idealDescription}`,
+          `Trait: ${trait}`
+        ].join("\n")
+      }
+    ];
 
-    **General:**
-    ${parsedRace} - ${parsedGender}
-    ${parsedAlignment} - ${title}
-
-    **Ability Scores:**
-    Wisdom: ${wisdom}
-    Dexterity: ${dexterity}
-    Strength: ${strength}
-    Intelligence: ${intelligence}
-    Charisma: ${charisma}
-    Constitution: ${constitution}
-
-    **Characteristics:**
-    *Bond*
-    ${bond}
-
-    *Flaw*
-    ${flaw}
-
-    *Ideal*
-    **${idealName}:** ${idealDescription}
-
-    *Trait*
-    ${trait}
-    `;
+    return this.buildEmbedMessage(name, fields);
   }
 }

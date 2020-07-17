@@ -2,6 +2,8 @@ import { Client as DiscordClient, Message } from "discord.js";
 
 import QQClient from "./client";
 
+import { COMMAND_PREFIX_REGEX } from "./constants/command.constants";
+
 const bot = new DiscordClient();
 const client = new QQClient();
 
@@ -10,14 +12,18 @@ bot.once("ready", () => {
 });
 
 bot.on("message", (message: Message) => {
-  if (message.author.bot) {
+  const text = message.content;
+
+  if (message.author.bot || !COMMAND_PREFIX_REGEX.test(text)) {
     // Ignore messages coming from bots. This also avoids qq talking to itself infinitely.
     return;
   }
 
-  const fullMessage = client.exec(message.content);
+  message.channel.send("I'm on it boss!");
 
-  message.channel.send(fullMessage);
+  const response = client.exec(text);
+
+  message.channel.send(response);
 });
 
 bot.login(process.env.DISCORD_BOT_SECRET);

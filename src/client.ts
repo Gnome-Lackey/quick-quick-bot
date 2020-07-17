@@ -1,3 +1,5 @@
+import { MessageEmbed } from "discord.js";
+
 import NameCommand from "./commands/name.command";
 import NPCCommand from "./commands/npc.command";
 
@@ -10,8 +12,7 @@ import {
   COMMAND_NAME,
   COMMAND_NPC,
   COMMAND_PREFIX,
-  COMMAND_ARG_COUNT_REGEX,
-  COMMAND_PREFIX_REGEX
+  COMMAND_ARG_COUNT_REGEX
 } from "./constants/command.constants";
 
 export default class QQClient {
@@ -28,7 +29,7 @@ export default class QQClient {
     this.npcCommand = new NPCCommand();
   }
 
-  private handleNameCommand(args: string[], argumentCount: number): string {
+  private handleNameCommand(args: string[], argumentCount: number): MessageEmbed {
     if (argumentCount === 0) {
       return this.nameCommand.generateDefaultMessage();
     } else {
@@ -46,7 +47,7 @@ export default class QQClient {
     }
   }
 
-  private handleNPCCommand(args: string[], argumentCount: number): string {
+  private handleNPCCommand(args: string[], argumentCount: number): MessageEmbed {
     const shouldGenerateRandomMessage = argumentCount === 0;
 
     let language: Language;
@@ -70,12 +71,7 @@ export default class QQClient {
     return this.npcCommand.generateMessage(name, race, gender);
   }
 
-  public exec(text: string): string {
-    if (!COMMAND_PREFIX_REGEX.test(text)) {
-      // Ignore commands that don't begin with the !qq.
-      return;
-    }
-
+  public exec(text: string): string | MessageEmbed {
     const [, argumentList] = text.split(COMMAND_PREFIX);
     const args = argumentList.split(" ").filter((arg) => !!arg);
 

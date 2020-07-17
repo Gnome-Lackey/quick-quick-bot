@@ -1,3 +1,4 @@
+import { MessageEmbed, EmbedFieldData } from "discord.js";
 import { exception } from "console";
 
 import { toProperNoun } from "../utilities/qq.utility";
@@ -9,6 +10,16 @@ import { LANGUAGE_DEFAULT } from "../constants/language.constants";
 import { GENDER_FEMALE, GENDER_MALE } from "../constants/gender.constants";
 
 export default class NameUtility {
+  private buildEmbedMessage(fields: EmbedFieldData[]): MessageEmbed {
+    return new MessageEmbed()
+      .setColor("#0099ff")
+      .setTitle("Quick-Quick Results")
+      .setDescription("Hey Boss! I thought of some names for you. Take a look!")
+      .addFields(fields)
+      .setTimestamp()
+      .setFooter("\u00a9 | Gnome Lackey");
+  }
+
   private getRandomNamesFrom(pool: string[], count: number): string[] {
     const names: string[] = [];
     const poolSize = pool.length;
@@ -38,7 +49,7 @@ export default class NameUtility {
 
     const fullNames = firstNames.map((firstName, index) => `${firstName} ${lastNames[index]}`);
 
-    return fullNames.join(",\n\t");
+    return fullNames.join("\n");
   }
 
   public generateNamesWith(
@@ -68,37 +79,45 @@ export default class NameUtility {
     gender: Gender,
     language: Language = LANGUAGE_DEFAULT,
     count = 1
-  ): string {
+  ): MessageEmbed {
     const properRace = toProperNoun(race);
 
-    return gender
-      ? `**${properRace} Names:**\n\t${this.generateNamesWith(race, gender, language, count)}`
-      : `**Female ${properRace} Names:**\n\t${this.generateNamesWith(
-          race,
-          GENDER_FEMALE,
-          language,
-          count
-        )}\n**Male ${properRace} Names:**\n\t${this.generateNamesWith(
-          race,
-          GENDER_MALE,
-          language,
-          count
-        )}`;
+    const fields = [];
+
+    if (gender) {
+      fields.push({
+        name: `${properRace} Names`,
+        value: this.generateNamesWith(race, gender, language, count)
+      });
+    } else {
+      fields.push({
+        name: "Female Names",
+        value: this.generateNamesWith(race, GENDER_FEMALE, language, count)
+      });
+      fields.push({
+        name: "Male Names",
+        value: this.generateNamesWith(race, GENDER_MALE, language, count)
+      });
+    }
+
+    return this.buildEmbedMessage(fields);
   }
 
-  public generateDefaultMessage(): string {
-    const femaleNameMessage = RACES.reduce(
-      (fullText, race: Race) => `${fullText}
-      **${toProperNoun(race)}:** ${this.generateNamesWith(race, GENDER_FEMALE)}`,
-      `*Female Names:*`
-    );
+  public generateDefaultMessage(): MessageEmbed {
+    const femaleNameField = {
+      name: "Female Names",
+      value: RACES.map(
+        (race: Race) => `**${toProperNoun(race)}:** ${this.generateNamesWith(race, GENDER_FEMALE)}`
+      ).join("\n")
+    };
 
-    const maleNameMessage = RACES.reduce(
-      (fullText, race: Race) => `${fullText}
-      **${toProperNoun(race)}:** ${this.generateNamesWith(race, GENDER_MALE)}`,
-      `*Male Names:*`
-    );
+    const maleNameField = {
+      name: "Male Names",
+      value: RACES.map(
+        (race: Race) => `**${toProperNoun(race)}:** ${this.generateNamesWith(race, GENDER_MALE)}`
+      ).join("\n")
+    };
 
-    return `${femaleNameMessage}\n${maleNameMessage}`;
+    return this.buildEmbedMessage([femaleNameField, maleNameField]);
   }
 }
