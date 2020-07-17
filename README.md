@@ -157,4 +157,4 @@ If you feel the urge to change something within the project we'd love to see the
 2) Create a PR to the `dev` branch. When submitting a new PR please make sure your fork is pointing to our `dev` branch. This way when it gets approved and merged our team can go in, run tests, and manually check that everything is still functioning correctly.
 3) Please describe what your PR is doing. Although we require our review, we also don't have _all_ the time in the world to look through the code line-by-line. Please make sure to specify the following when submitting a PR: What the change does, Why you think the change should be included, and any important notes we should know about.
 
-That's it! Thanks for any help or contribution to the project :D
+That's it! Thanks for any help or contribution to the project 😀
