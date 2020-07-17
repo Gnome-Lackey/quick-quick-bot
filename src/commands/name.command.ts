@@ -8,16 +8,17 @@ import { Gender, Language, Race } from "../types";
 import { RACE_HUMAN, RACES } from "../constants/race.constants";
 import { LANGUAGE_DEFAULT } from "../constants/language.constants";
 import { GENDER_FEMALE, GENDER_MALE } from "../constants/gender.constants";
+import { MESSAGE_FOOTER, MESSAGE_TITLE, MESSAGE_COLOR } from "../constants/message.constants";
 
 export default class NameUtility {
   private buildEmbedMessage(fields: EmbedFieldData[]): MessageEmbed {
     return new MessageEmbed()
-      .setColor("#0099ff")
-      .setTitle("Quick-Quick Results")
+      .setColor(MESSAGE_COLOR)
+      .setTitle(MESSAGE_TITLE)
       .setDescription("Hey Boss! I thought of some names for you. Take a look!")
       .addFields(fields)
       .setTimestamp()
-      .setFooter("\u00a9 | Gnome Lackey");
+      .setFooter(MESSAGE_FOOTER);
   }
 
   private getRandomNamesFrom(pool: string[], count: number): string[] {

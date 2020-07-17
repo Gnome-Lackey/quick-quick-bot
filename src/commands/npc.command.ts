@@ -1,17 +1,25 @@
+import { EmbedFieldData, MessageEmbed } from "discord.js";
+
 import { toProperNoun } from "../utilities/qq.utility";
 
 import { Gender, Race, BackgroundCharacteristic, BackgroundIdeal, Ideal } from "../types";
-import { EmbedFieldData, MessageEmbed } from "discord.js";
+
+import { MESSAGE_COLOR, MESSAGE_TITLE, MESSAGE_FOOTER } from "src/constants/message.constants";
+import {
+  ALIGNMENT_DEFAULT,
+  ALIGNMENT_ATTITUDES,
+  ALIGNMENT_MORALITIES
+} from "src/constants/alignment.constants";
 
 export default class NPCUtility {
   private buildEmbedMessage(name: string, fields: EmbedFieldData[]): MessageEmbed {
     return new MessageEmbed()
-      .setColor("#0099ff")
-      .setTitle("Quick-Quick Results")
+      .setColor(MESSAGE_COLOR)
+      .setTitle(MESSAGE_TITLE)
       .setDescription(`Hey Boss! I'd like to introduce you to *${name}!*`)
       .addFields(fields)
       .setTimestamp()
-      .setFooter("\u00a9 | Gnome Lackey");
+      .setFooter(MESSAGE_FOOTER);
   }
 
   private getRandomCharacteristicFrom(pool: string[] | Ideal[]): string | Ideal {
@@ -33,22 +41,23 @@ export default class NPCUtility {
 
   private generateAlignment(value: string): string {
     const parsedValue = value.toLowerCase();
-    const ATTITUDES = ["lawful", "neutral", "chaotic"];
-    const MORALITIES = ["good", "neutral", "evil"];
 
-    if (parsedValue === "any") {
-      const attitudeRandomIndex = Math.floor(Math.random() * ATTITUDES.length);
-      const moralityRandomIndex = Math.floor(Math.random() * MORALITIES.length);
+    if (parsedValue === ALIGNMENT_DEFAULT) {
+      const attitudeRandomIndex = Math.floor(Math.random() * ALIGNMENT_ATTITUDES.length);
+      const moralityRandomIndex = Math.floor(Math.random() * ALIGNMENT_MORALITIES.length);
 
-      return toProperNoun(`${ATTITUDES[attitudeRandomIndex]} ${MORALITIES[moralityRandomIndex]}`);
-    } else if (MORALITIES.includes(parsedValue)) {
-      const randomIndex = Math.floor(Math.random() * ATTITUDES.length);
+      const attitude = ALIGNMENT_ATTITUDES[attitudeRandomIndex];
+      const morality = ALIGNMENT_MORALITIES[moralityRandomIndex];
 
-      return toProperNoun(`${ATTITUDES[randomIndex]} ${parsedValue}`);
+      return toProperNoun(`${attitude} ${morality}`);
+    } else if (ALIGNMENT_MORALITIES.includes(parsedValue)) {
+      const randomIndex = Math.floor(Math.random() * ALIGNMENT_ATTITUDES.length);
+
+      return toProperNoun(`${ALIGNMENT_ATTITUDES[randomIndex]} ${parsedValue}`);
     } else {
-      const randomIndex = Math.floor(Math.random() * MORALITIES.length);
+      const randomIndex = Math.floor(Math.random() * ALIGNMENT_MORALITIES.length);
 
-      return toProperNoun(`${parsedValue} ${MORALITIES[randomIndex]}`);
+      return toProperNoun(`${parsedValue} ${ALIGNMENT_MORALITIES[randomIndex]}`);
     }
   }
 
