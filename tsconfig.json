@@ -9,6 +9,16 @@
     "target": "es6",
     "moduleResolution": "node"
   },
-  "files": ["./src/bot.ts", "./src/name.utility.ts", "./src/types.ts"],
+  "files": [
+    "src/bot.ts",
+    "src/client.ts",
+    "src/commands/name.command.ts",
+    "src/commands/npc.command.ts",
+    "src/utilities/qq.utility.ts",
+    "src/constants/command.constants.ts",
+    "src/constants/gender.constants.ts",
+    "src/constants/language.constants.ts",
+    "src/constants/race.constants.ts"
+  ],
   "exclude": ["node_modules"]
 }
