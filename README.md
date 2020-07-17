@@ -4,37 +4,17 @@ The trusted quick-quick gnome lackey is a bot to aid all DM/GMs when they need t
 
 That's where this bot comes in. No longer will you have to worry about name generation! Quick-Quick, your trusty gnome lackey, will do the work for you. Just give him a command, and he'll come up with something on the spot for you to impress your party. Instead of hearing "Peter? His name is Peter? That's so basic." you'll hear "Oh wow Sigard Sundafyllir, that's a baller name, did you just think of that?"
 
-## Using quick-quick to Generate Names
+## Using Quick-Quick to Generate Names
 
 To generate random names with quick-quick all you need to do is type the following in a channel where the bot is included.
 
 ```text
-qq!
+!qq name
 ```
 
 It will respond with a name for each race (humans will default to english), like so:
 
-```text
-I'm on it boss!
-Female Names:
-      Dragonborn: Aasathra Dhyrktelonis
-      Dwarf: Svanhild Torunn
-      Elf: Antinua Holimion
-      Gnome: Dalaba Garrick
-      Halfling: Nikki Wildcloak
-      Human: Galiena Preacher
-      Orc: Grai the Boiling
-      Tiefling: Ronwe Entropy
-Male Names:
-      Dragonborn: Trynnicus Mystan
-      Dwarf: Eberk Orcfoe
-      Elf: Aelar Galanodel
-      Gnome: Orryn Wildwander
-      Halfling: Bernie Porridgepot
-      Human: Hubert Lamb
-      Orc: Korag the Master of Misery
-      Tiefling: Tethren Tragedy
-```
+![example](./images/name_command_example.png)
 
 If you need something more specific, there are a number of arguments that you can supply quick-quick with to narrow down the search, such as:
 
@@ -46,12 +26,36 @@ If you need something more specific, there are a number of arguments that you ca
 To use these arguments just add the value after the command, like so:
 
 ```text
-qq! dragonborn male 2
+!qq name dwarf male 4
 ```
 
 This will give you something like the following:
 
+![example](./images/name_specific_command_example.png)
+
+## Using Quick-Quick to Generate NPC
+
+To generate a random NPC with quick-quick all you need to do is type the following in a channel where the bot is included.
+
 ```text
-I'm on it boss!
-Dragonborn Names: Pandjed Argenthrixus, Srorthen Hshhsstoroth
+!qq npc
 ```
+
+It will respond with a new NPC, like so:
+
+![example](./images/npc_command_example.png)
+
+If you need something more specific, there are a number of arguments that you can supply quick-quick with to narrow down the search, such as:
+
+1) gender
+2) race
+
+To use these arguments just add the value after the command, like so:
+
+```text
+!qq npc dwarf male
+```
+
+This will give you something like the following:
+
+![example](./images/npc_specific_command_example.png)
