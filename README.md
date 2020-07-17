@@ -126,7 +126,7 @@ $ tsc -p tsconfig.json
 Howdy boss! Quick-Quick gnome lackey at your service.
 ```
 
-> NOTE: You may see the following WARNING from typescript-eslint
+> NOTE: You may see the following WARNING from typescript-estree
 >
 > =============
 >
@@ -143,7 +143,7 @@ Howdy boss! Quick-Quick gnome lackey at your service.
 > =============
 >
 > This should not cause anything to break within the code. It's just saying that there may be things in our version of TypeScript that
-> may not be supported yet by the linter. You can ignore this since we aren't using anything too fancy.
+> may not be supported yet by the parser. You can ignore this since we aren't using anything too fancy.
 
 If you navigate over to your discord server you should see _quick-quick_ in your server's channels. Be sure to lock down the permissions of the channels you don't want him to join!
 
