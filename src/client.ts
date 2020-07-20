@@ -3,7 +3,7 @@ import { MessageEmbed } from "discord.js";
 import NameCommand from "./commands/name.command";
 import NPCCommand from "./commands/npc.command";
 
-import { Language, Gender, Race } from "./types";
+import { Language, Gender, Race } from "./models/general.models";
 
 import { RACE_HUMAN, RACES } from "./constants/race.constants";
 import { LANGUAGES } from "./constants/language.constants";

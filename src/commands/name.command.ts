@@ -3,7 +3,7 @@ import { exception } from "console";
 
 import { toProperNoun } from "../utilities/qq.utility";
 
-import { Gender, Language, Race } from "../types";
+import { Gender, Language, Race } from "../models/general.models";
 
 import { RACE_HUMAN, RACES } from "../constants/race.constants";
 import { LANGUAGE_DEFAULT } from "../constants/language.constants";

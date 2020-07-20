@@ -1,0 +1,7 @@
+{
+  "tiny": { "die": 4, "cost": 0.66 },
+  "small": { "die": 6, "cost": 1 },
+  "medium": { "die": 8, "cost": 1.33 },
+  "large": { "die": 10, "cost": 1.66 },
+  "grand": { "die": 12, "cost": 2 }
+}
