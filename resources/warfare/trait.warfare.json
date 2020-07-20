@@ -24,7 +24,7 @@
     "cost": 50
   },
   "horrify": {
-    "descirption": "If this unit inflicts a casualty on an enemy unit, that unit must make a DC 15 morale check. Failure exhausts the unit.",
+    "description": "If this unit inflicts a casualty on an enemy unit, that unit must make a DC 15 morale check. Failure exhausts the unit.",
     "cost": 200
   },
   "martial": {

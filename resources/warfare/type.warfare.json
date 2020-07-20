@@ -30,13 +30,5 @@
     "toughness": 1,
     "morale": 0,
     "cost": 1
-  },
-  "siege": {
-    "attack": 1,
-    "power": 1,
-    "defense": 0,
-    "toughness": 1,
-    "morale": 0,
-    "cost": 1.5
   }
 }

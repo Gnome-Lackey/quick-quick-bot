@@ -125,7 +125,7 @@
     "defense": 0,
     "toughness": 2,
     "morale": 0,
-    "traits": ["siege engine", "twisting roots", "hurl rocks"]
+    "traits": ["twisting roots", "hurl rocks"]
   },
   "troll": {
     "attack": 0,

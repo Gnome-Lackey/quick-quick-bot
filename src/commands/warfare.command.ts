@@ -3,63 +3,28 @@ import { EmbedFieldData, MessageEmbed } from "discord.js";
 import { toProperNoun } from "../utilities/qq.utility";
 
 import {
+  UnitAncestry,
+  UnitEquipment,
+  UnitExperience,
+  UnitSize,
+  UnitType,
+  UnitTrait,
+  UnitStats
+} from "../models/warfare.models";
+
+import {
   WARFARE_ANCESTRY,
   WARFARE_EQUIPMENT,
   WARFARE_EXP,
   WARFARE_SIZE,
-  WARFARE_TYPE
+  WARFARE_TYPE,
+  WARFARE_COST_MULTIPLIER,
+  WARFARE_FEEBLE_TAX,
+  WARFARE_SCORE_BASE,
+  WARFARE_MORALE_COST_MULTIPLIER
 } from "../constants/warfare.constants";
 
 import { MESSAGE_COLOR, MESSAGE_FOOTER } from "../constants/message.constants";
-
-interface UnitEquipment {
-  power: number;
-  defense: number;
-}
-
-interface UnitAncestry {
-  attack: number;
-  power: number;
-  defense: number;
-  toughness: number;
-  morale: number;
-  traits: string[];
-}
-
-interface UnitExperience {
-  attack: number;
-  toughness: number;
-  morale: number;
-}
-
-interface UnitSize {
-  die: number;
-  cost: number;
-}
-
-interface UnitType {
-  attack: number;
-  power: number;
-  defense: number;
-  toughness: number;
-  morale: number;
-  cost: number;
-}
-
-interface UnitStats {
-  attack: string;
-  power: string;
-  defense: number;
-  toughness: number;
-  morale: string;
-  cost: string;
-}
-
-interface UnitTrait {
-  name: string;
-  description: string;
-  cost: number;
-}
 
 export default class NPCUtility {
   private buildEmbedMessage(
@@ -94,15 +59,25 @@ export default class NPCUtility {
     const attackMod = ancestry.attack + exp.attack + type.attack;
     const powerMod = ancestry.power + equipment.power + type.power;
     const moraleMod = ancestry.morale + exp.morale + type.morale;
+    const defenseMod = ancestry.defense + equipment.defense + type.defense;
+    const toughnessMod = ancestry.toughness + exp.toughness + type.toughness;
 
     const attackScore = `${attackMod >= 0 ? "+" : ""}${attackMod}`;
     const powerScore = `${powerMod >= 0 ? "+" : ""}${powerMod}`;
-    const defenseScore = ancestry.defense + equipment.defense + type.defense + 10;
-    const toughnessScore = ancestry.toughness + exp.toughness + type.toughness + 10;
+    const defenseScore = defenseMod + WARFARE_SCORE_BASE;
+    const toughnessScore = toughnessMod + WARFARE_SCORE_BASE;
     const moraleScore = `${moraleMod >= 0 ? "+" : ""}${moraleMod}`;
-    const costOfStats = attackMod + powerMod + defenseScore + toughnessScore + moraleMod * 2;
+    const costOfStats = attackMod + powerMod + defenseMod + toughnessMod + moraleMod * WARFARE_MORALE_COST_MULTIPLIER;
     const costOfTraits = traits.reduce((total, trait) => trait.cost + total, 0);
-    const totalCost = Math.floor(costOfStats * size.cost * type.cost * 10 + costOfTraits);
+
+    const totalCost = Math.floor(
+      costOfStats *
+      size.cost *
+      type.cost *
+      WARFARE_COST_MULTIPLIER +
+      costOfTraits +
+      WARFARE_FEEBLE_TAX
+    );
 
     return {
       attack: attackScore,
@@ -139,8 +114,6 @@ export default class NPCUtility {
     const traits = ancestry.traits.map(
       (trait: string): UnitTrait => ({ ...traitPool[trait], name: trait })
     );
-
-    console.log(randomAncestry, randomEquipment, randomExperience, randomSize, randomType);
 
     const stats = this.buildUnitStats(ancestry, equipment, experience, size, type, traits);
 
