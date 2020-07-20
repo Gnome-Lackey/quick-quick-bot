@@ -76,10 +76,7 @@ export default class QQClient {
   }
 
   private handleWarfareCommand(args: string[], argumentCount: number): MessageEmbed {
-    // const name = this.nameCommand.generateNamesWith(race, gender, language, 1);
-    const name = "Cool Dudes";
-
-    return this.warfareCommand.generateMessage(name);
+    return this.warfareCommand.generateMessage();
   }
 
   public exec(text: string): string | MessageEmbed {

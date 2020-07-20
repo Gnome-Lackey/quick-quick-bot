@@ -28,7 +28,6 @@ import { MESSAGE_COLOR, MESSAGE_FOOTER } from "../constants/message.constants";
 
 export default class NPCUtility {
   private buildEmbedMessage(
-    name: string,
     ancestry: string,
     exp: string,
     equipment: string,
@@ -36,13 +35,13 @@ export default class NPCUtility {
     cost: string,
     fields: EmbedFieldData[]
   ): MessageEmbed {
-    const unitTitle = toProperNoun(`${ancestry} ${exp}`);
-    const unitType = toProperNoun(`${equipment} ${type}`);
+    const name = toProperNoun(`${equipment} ${ancestry} ${type}`);
+    const description = `__Unit Experience:__ ${toProperNoun(exp)}\n\n__Unit Cost:__ ${cost}`;
 
     return new MessageEmbed()
       .setColor(MESSAGE_COLOR)
-      .setTitle(`${name} [${cost}]`)
-      .setDescription(`${unitTitle}\n${unitType}`)
+      .setTitle(name)
+      .setDescription(description)
       .addFields(fields)
       .setTimestamp()
       .setFooter(MESSAGE_FOOTER);
@@ -71,12 +70,9 @@ export default class NPCUtility {
     const costOfTraits = traits.reduce((total, trait) => trait.cost + total, 0);
 
     const totalCost = Math.floor(
-      costOfStats *
-      size.cost *
-      type.cost *
-      WARFARE_COST_MULTIPLIER +
-      costOfTraits +
-      WARFARE_FEEBLE_TAX
+      costOfStats * size.cost * type.cost * WARFARE_COST_MULTIPLIER +
+        costOfTraits +
+        WARFARE_FEEBLE_TAX
     );
 
     return {
@@ -89,7 +85,7 @@ export default class NPCUtility {
     };
   }
 
-  public generateMessage(name: string): MessageEmbed {
+  public generateMessage(): MessageEmbed {
     const randomAncestry = WARFARE_ANCESTRY[Math.floor(Math.random() * WARFARE_ANCESTRY.length)];
     const ancestryPool = require("../../resources/warfare/ancestry.warfare.json");
     const ancestry = ancestryPool[randomAncestry];
@@ -117,6 +113,13 @@ export default class NPCUtility {
 
     const stats = this.buildUnitStats(ancestry, equipment, experience, size, type, traits);
 
+    if (randomType === "cavalry") {
+      traits.push({
+        name: "charge",
+        description: "Cannot use while engaged. A Charge is an attack with advantage on the Attack check. It inflicts 2 casualties on a successful Power check. The charging unit is then engaged with the defending unit and must make a DC 13 Morale check to disengage.",
+      });
+    }
+
     const fields = [
       { name: "\u200B", value: "\u200B" },
       { name: "Attack", value: stats.attack, inline: true },
@@ -135,7 +138,6 @@ export default class NPCUtility {
     ];
 
     return this.buildEmbedMessage(
-      name,
       randomAncestry,
       randomExperience,
       randomEquipment,

@@ -48,7 +48,7 @@
     "cost": 250
   },
   "savage": {
-    "description": "This unit has advantage on the first attack check it makes each battle.",
+    "description": "This unit has advantage on the first power check it makes each battle.",
     "cost": 50
   },
   "stalwart": {
