@@ -2,6 +2,7 @@ import { MessageEmbed } from "discord.js";
 
 import NameCommand from "./commands/name.command";
 import NPCCommand from "./commands/npc.command";
+import WarfareCommand from "./commands/warfare.command";
 
 import { Language, Gender, Race } from "./models/general.models";
 
@@ -12,12 +13,14 @@ import {
   COMMAND_NAME,
   COMMAND_NPC,
   COMMAND_PREFIX,
-  COMMAND_ARG_COUNT_REGEX
+  COMMAND_ARG_COUNT_REGEX,
+  COMMAND_WARFARE
 } from "./constants/command.constants";
 
 export default class QQClient {
   private nameCommand: NameCommand;
   private npcCommand: NPCCommand;
+  private warfareCommand: WarfareCommand;
 
   private errorMessage = `Woah there, boss! I don't think you're speakin my language. I only understand the following:
     -> \`!qq name\` - This translates in to: create a bunch of random names.
@@ -27,6 +30,7 @@ export default class QQClient {
   constructor() {
     this.nameCommand = new NameCommand();
     this.npcCommand = new NPCCommand();
+    this.warfareCommand = new WarfareCommand();
   }
 
   private handleNameCommand(args: string[], argumentCount: number): MessageEmbed {
@@ -71,6 +75,13 @@ export default class QQClient {
     return this.npcCommand.generateMessage(name, race, gender);
   }
 
+  private handleWarfareCommand(args: string[], argumentCount: number): MessageEmbed {
+    // const name = this.nameCommand.generateNamesWith(race, gender, language, 1);
+    const name = "Cool Dudes";
+
+    return this.warfareCommand.generateMessage(name);
+  }
+
   public exec(text: string): string | MessageEmbed {
     const [, argumentList] = text.split(COMMAND_PREFIX);
     const args = argumentList.split(" ").filter((arg) => !!arg);
@@ -87,6 +98,8 @@ export default class QQClient {
         return this.handleNameCommand(args, argumentCount);
       case COMMAND_NPC:
         return this.handleNPCCommand(args, argumentCount);
+      case COMMAND_WARFARE:
+        return this.handleWarfareCommand(args, argumentCount);
       default:
         return this.errorMessage;
     }

@@ -23,14 +23,6 @@
     "morale": 2,
     "cost": 1.5
   },
-  "levies": {
-    "attack": 0,
-    "power": 0,
-    "defense": 0,
-    "toughness": 0,
-    "morale": -1,
-    "cost": 0.75
-  },
   "infantry": {
     "attack": 0,
     "power": 0,
