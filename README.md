@@ -1,3 +1,5 @@
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VKWKZKMLU7YVU&currency_code=USD&source=url) If you like what you see, why not buy this lowly gnome a coffee?
+
 # quick-quick-bot
 
 The trusted quick-quick gnome lackey is a bot to aid all DM/GMs when they need to think of something on the spot. We've all been there before as DM/GMs. That dreaded moment when a player asks you, "what's this orc's name?" The panic takes hold of you causing you to fumble through loose papers, "her name? Oh yes her name, let me tell you her name. It's, uhhh, Furby the Great." The players laugh, while you facepalm and write down Furby on a note somewhere.
