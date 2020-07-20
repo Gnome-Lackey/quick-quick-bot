@@ -66,6 +66,7 @@ export interface UnitStats {
   defense: number;
   toughness: number;
   morale: string;
+  traits: string[];
   cost: string;
 }
 
