@@ -18,10 +18,10 @@ It will respond with a name for each race (humans will default to english), like
 
 If you need something more specific, there are a number of arguments that you can supply quick-quick with to narrow down the search, such as:
 
-1. gender
-2. race
-3. language (human only)
-4. count
+1. _gender:_ male, or female.
+2. _race:_ dragonborn, dwarf, elf, gnome, halfling, human, orc, or tiefling.
+3. _language (human only):_ african, celtic, chinese, egyptian, english, french, german, greek, indian, japanese, mesoamerican, norse, polynesian, roman, slavic, or spanish.
+4. _count:_ the number of names you want.
 
 To use these arguments just add the value after the command, like so:
 
@@ -47,8 +47,8 @@ It will respond with a new NPC, like so:
 
 If you need something more specific, there are a number of arguments that you can supply quick-quick with to narrow down the search, such as:
 
-1. gender
-2. race
+1. _gender:_ male, or female.
+2. _race:_ dragonborn, dwarf, elf, gnome, halfling, human, orc, or tiefling.
 
 To use these arguments just add the value after the command, like so:
 
@@ -59,6 +59,36 @@ To use these arguments just add the value after the command, like so:
 This will give you something like the following:
 
 ![example](./images/npc_specific_command_example.png)
+
+## Using Quick-Quick to Generate MCDM Warfare Units
+
+If you haven't heard of [_Strongholds & Followers_](https://shop.mcdmproductions.com/products/strongholds-followers-pdf) I highly recommend getting it. It has a lot of great material to add to your campaign. That being said, one of the great things it brings to the table is a mechanic called warfare. This new feature brings war gaming to your 5e campaign by giving _units_ of troops to your player's. These units have stats, abilities, and characteristics that Quick-Quick can generate for you on the fly. In order to hastily order up a unit at random just type the following command.
+
+```text
+!qq warfare
+```
+
+This will give you something like the following:
+
+![example](./images/warfare_command_example.png)
+
+If you need something more specific, there are a number of arguments that you can supply Quick-Quick with to narrow down the search, such as:
+
+1. _ancestry:_ bugbear, dragonborn, dwarf, elf, ghoul, gnoll, gnome, goblin, hobgoblin, human, kobold, lizardfolk, ogre, orc, skeleton, treant, troll, or zombie.
+2. _experience:_ green, regular, seasoned, veteran, elite, or legend.
+3. _equipment:_ light, medium, heavy, super-heavy.
+4. _type:_ flying, archers, calvary, infantry.
+5. _size:_ tiny, small, medium, large, grand.
+
+To use these arguments just add the value after the command, like so:
+
+```text
+!qq warfare dwarf legend heavy grand infantry
+```
+
+This will give you something like the following:
+
+![example](./images/warfare_specific_command_example.png)
 
 ## Getting Quick-Quick Working on your Server
 
