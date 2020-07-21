@@ -2,7 +2,8 @@ import { EmbedFieldData, MessageEmbed } from "discord.js";
 
 import { toProperNoun } from "../utilities/qq.utility";
 
-import { Gender, Race, BackgroundCharacteristic, BackgroundIdeal, Ideal } from "../types";
+import { Gender, Race } from "../models/general.models";
+import { BackgroundCharacteristic, BackgroundIdeal, Ideal } from "../models/background.models";
 
 import { MESSAGE_COLOR, MESSAGE_TITLE, MESSAGE_FOOTER } from "../constants/message.constants";
 import {
