@@ -64,7 +64,7 @@ This will give you something like the following:
 
 ## Using Quick-Quick to Generate MCDM Warfare Units
 
-If you haven't heard of [_Strongholds & Followers_](https://shop.mcdmproductions.com/products/strongholds-followers-pdf) I highly recommend getting it. It has a lot of great material to add to your campaign. That being said, one of the great things it brings to the table is a mechanic called warfare. This new feature brings war gaming to your 5e campaign by giving _units_ of troops to your player's. These units have stats, abilities, and characteristics that Quick-Quick can generate for you on the fly. In order to hastily order up a unit at random just type the following command.
+If you haven't heard of **Matt Colville's** [_Strongholds & Followers_](https://shop.mcdmproductions.com/products/strongholds-followers-pdf) I highly recommend getting it. It has a lot of great material to add to your campaign. That being said, one of the great things it brings to the table is a mechanic called warfare. This new feature brings war gaming to your 5e campaign by giving _units_ of troops to your player's. These units have stats, abilities, and characteristics that Quick-Quick can generate for you on the fly. In order to hastily order up a unit at random just type the following command.
 
 ```text
 !qq warfare
