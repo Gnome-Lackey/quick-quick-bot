@@ -1,4 +1,4 @@
-export type Ancestry =
+export type WarfareAncestryType =
   | "bugbear"
   | "dragonborn"
   | "dwarf"
@@ -18,13 +18,19 @@ export type Ancestry =
   | "troll"
   | "zombie";
 
-export type Experience = "green" | "regular" | "seasoned" | "veteran" | "elite" | "legend";
+export type WarfareExperienceType =
+  | "green"
+  | "regular"
+  | "seasoned"
+  | "veteran"
+  | "elite"
+  | "legend";
 
-export type Equipment = "light" | "medium" | "heavy" | "super-heavy";
+export type WarfareEquipmentType = "light" | "medium" | "heavy" | "super-heavy";
 
-export type Type = "flying" | "archers" | "calvary" | "infantry";
+export type WarfareUnitType = "flying" | "archers" | "calvary" | "infantry";
 
-export type Size = "tiny" | "small" | "medium" | "large" | "grand";
+export type WarfareSizeType = "tiny" | "small" | "medium" | "large" | "grand";
 
 export interface UnitEquipment {
   power: number;

@@ -5,6 +5,13 @@ import NPCCommand from "./commands/npc.command";
 import WarfareCommand from "./commands/warfare.command";
 
 import { Language, Gender, Race } from "./models/general.models";
+import {
+  WarfareExperienceType,
+  WarfareSizeType,
+  WarfareUnitType,
+  WarfareEquipmentType,
+  WarfareAncestryType
+} from "./models/warfare.models";
 
 import { RACE_HUMAN, RACES } from "./constants/race.constants";
 import { LANGUAGES } from "./constants/language.constants";
@@ -16,6 +23,13 @@ import {
   COMMAND_ARG_COUNT_REGEX,
   COMMAND_WARFARE
 } from "./constants/command.constants";
+import {
+  WARFARE_ANCESTRY,
+  WARFARE_EQUIPMENT,
+  WARFARE_TYPE,
+  WARFARE_SIZE,
+  WARFARE_EXP
+} from "./constants/warfare.constants";
 
 export default class QQClient {
   private nameCommand: NameCommand;
@@ -31,6 +45,20 @@ export default class QQClient {
     this.nameCommand = new NameCommand();
     this.npcCommand = new NPCCommand();
     this.warfareCommand = new WarfareCommand();
+  }
+
+  private parseInput(
+    hasArguments: boolean,
+    listOfValues: string[],
+    listOfArguments: string[]
+  ): string {
+    let value: string;
+
+    if (hasArguments) {
+      value = listOfValues.find((nextAncestry) => listOfArguments.includes(nextAncestry));
+    }
+
+    return value || listOfValues[Math.floor(Math.random() * listOfValues.length)];
   }
 
   private handleNameCommand(args: string[], argumentCount: number): MessageEmbed {
@@ -52,22 +80,15 @@ export default class QQClient {
   }
 
   private handleNPCCommand(args: string[], argumentCount: number): MessageEmbed {
-    const shouldGenerateRandomMessage = argumentCount === 0;
+    const hasArgs = argumentCount > 0;
 
     let language: Language;
 
-    const race = (shouldGenerateRandomMessage
-      ? RACES[Math.floor(Math.random() * RACES.length)]
-      : RACES.find((nextRace) => args.includes(nextRace))) as Race;
-
-    const gender = (shouldGenerateRandomMessage
-      ? GENDERS[Math.floor(Math.random() * GENDERS.length)]
-      : GENDERS.find((nextGender) => args.includes(nextGender))) as Gender;
+    const race = this.parseInput(hasArgs, RACES, args) as Race;
+    const gender = this.parseInput(hasArgs, GENDERS, args) as Gender;
 
     if (race === RACE_HUMAN) {
-      language = (shouldGenerateRandomMessage
-        ? LANGUAGES[Math.floor(Math.random() * LANGUAGES.length)]
-        : LANGUAGES.find((nextLang) => args.includes(nextLang))) as Language;
+      language = this.parseInput(hasArgs, LANGUAGES, args) as Language;
     }
 
     const name = this.nameCommand.generateNamesWith(race, gender, language, 1);
@@ -76,7 +97,15 @@ export default class QQClient {
   }
 
   private handleWarfareCommand(args: string[], argumentCount: number): MessageEmbed {
-    return this.warfareCommand.generateMessage();
+    const hasArgs = argumentCount > 0;
+
+    const ancestry = this.parseInput(hasArgs, WARFARE_ANCESTRY, args) as WarfareAncestryType;
+    const equipment = this.parseInput(hasArgs, WARFARE_EQUIPMENT, args) as WarfareEquipmentType;
+    const exp = this.parseInput(hasArgs, WARFARE_EXP, args) as WarfareExperienceType;
+    const size = this.parseInput(hasArgs, WARFARE_SIZE, args) as WarfareSizeType;
+    const type = this.parseInput(hasArgs, WARFARE_TYPE, args) as WarfareUnitType;
+
+    return this.warfareCommand.generateMessage(ancestry, equipment, exp, size, type);
   }
 
   public exec(text: string): string | MessageEmbed {

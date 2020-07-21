@@ -9,15 +9,15 @@ import {
   UnitSize,
   UnitType,
   UnitTrait,
-  UnitStats
+  UnitStats,
+  WarfareEquipmentType,
+  WarfareExperienceType,
+  WarfareUnitType,
+  WarfareSizeType,
+  WarfareAncestryType
 } from "../models/warfare.models";
 
 import {
-  WARFARE_ANCESTRY,
-  WARFARE_EQUIPMENT,
-  WARFARE_EXP,
-  WARFARE_SIZE,
-  WARFARE_TYPE,
   WARFARE_COST_MULTIPLIER,
   WARFARE_FEEBLE_TAX,
   WARFARE_SCORE_BASE,
@@ -75,9 +75,7 @@ export default class NPCUtility {
     const costOfAllStats = costOfModifiers + costOfMorale * size.cost * type.cost;
     const costOfTraits = traits.reduce((total, trait) => trait.cost + total, 0);
 
-    const totalCost = Math.floor(
-      (costOfAllStats + costOfTraits) * WARFARE_COST_MULTIPLIER + WARFARE_FEEBLE_TAX
-    );
+    const totalCost = Math.floor(costOfAllStats * WARFARE_COST_MULTIPLIER + costOfTraits + WARFARE_FEEBLE_TAX);
 
     if (isCavalry) {
       traits.push({
@@ -87,51 +85,47 @@ export default class NPCUtility {
       });
     }
 
+    const unitTraits = traits.map((trait: UnitTrait) => `__${toProperNoun(trait.name)}:__ ${trait.description}`);
+
     return {
       attack: attackScore,
       power: powerScore,
       defense: defenseScore,
       toughness: toughnessScore,
       morale: moraleScore,
-      traits: traits.map(
-        (trait: UnitTrait) => `__${toProperNoun(trait.name)}:__ ${trait.description}`
-      ),
+      traits: unitTraits,
       cost: `${totalCost} GP`
     };
   }
 
   public generateMessage(
-    desiredAncestry?: string,
-    desiredEquipment?: string,
-    desiredExp?: string,
-    desiredSize?: string,
-    desiredType?: string
+    ancestryName?: WarfareAncestryType,
+    equipmentName?: WarfareEquipmentType,
+    experienceName?: WarfareExperienceType,
+    sizeName?: WarfareSizeType,
+    typeName?: WarfareUnitType
   ): MessageEmbed {
-    const randomAncestry = WARFARE_ANCESTRY[Math.floor(Math.random() * WARFARE_ANCESTRY.length)];
     const ancestryPool = require("../../resources/warfare/ancestry.warfare.json");
-    const ancestry = ancestryPool[desiredAncestry || randomAncestry];
+    const ancestry = ancestryPool[ancestryName];
 
-    const randomEquipment = WARFARE_EQUIPMENT[Math.floor(Math.random() * WARFARE_EQUIPMENT.length)];
     const equipmentPool = require("../../resources/warfare/equipment.warfare.json");
-    const equipment = equipmentPool[desiredEquipment || randomEquipment];
+    const equipment = equipmentPool[equipmentName];
 
-    const randomExperience = WARFARE_EXP[Math.floor(Math.random() * WARFARE_EXP.length)];
     const expPool = require("../../resources/warfare/experience.warfare.json");
-    const experience = expPool[desiredExp || randomExperience];
+    const experience = expPool[experienceName];
 
-    const randomSize = WARFARE_SIZE[Math.floor(Math.random() * WARFARE_SIZE.length)];
     const sizePool = require("../../resources/warfare/size.warfare.json");
-    const size = sizePool[desiredSize || randomSize];
+    const size = sizePool[sizeName];
 
-    const randomType = WARFARE_TYPE[Math.floor(Math.random() * WARFARE_TYPE.length)];
     const typePool = require("../../resources/warfare/type.warfare.json");
-    const type = typePool[desiredType || randomType];
-    const isCavalry = desiredType === WARFARE_TYPE_CAVALRY || randomType === WARFARE_TYPE_CAVALRY;
+    const type = typePool[typeName];
+    const isCavalry = (typeName as string) === WARFARE_TYPE_CAVALRY;
 
     const traitPool = require("../../resources/warfare/trait.warfare.json");
-    const traits = ancestry.traits.map(
-      (trait: string): UnitTrait => ({ ...traitPool[trait], name: trait })
-    );
+    const traits = ancestry.traits.map((trait: string): UnitTrait => ({ ...traitPool[trait], name: trait }));
+
+    console.log(ancestryName, equipmentName, experienceName, sizeName, typeName);
+    console.log(ancestry, equipment, experience, size, type);
 
     const stats = this.buildUnitStats(
       ancestry,
@@ -156,10 +150,10 @@ export default class NPCUtility {
     ];
 
     return this.buildEmbedMessage(
-      randomAncestry,
-      randomExperience,
-      randomEquipment,
-      randomType,
+      ancestryName,
+      experienceName,
+      equipmentName,
+      typeName,
       stats.cost,
       fields
     );
