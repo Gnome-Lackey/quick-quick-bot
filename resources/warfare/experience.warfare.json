@@ -1,0 +1,32 @@
+{
+  "green": {
+    "attack": 0,
+    "toughness": 0,
+    "morale": 0
+  },
+  "regular": {
+    "attack": 1,
+    "toughness": 1,
+    "morale": 1
+  },
+  "seasoned": {
+    "attack": 1,
+    "toughness": 1,
+    "morale": 2
+  },
+  "veteran": {
+    "attack": 1,
+    "toughness": 1,
+    "morale": 3
+  },
+  "elite": {
+    "attack": 2,
+    "toughness": 2,
+    "morale": 4
+  },
+  "legend": {
+    "attack": 2,
+    "toughness": 3,
+    "morale": 5
+  }
+}

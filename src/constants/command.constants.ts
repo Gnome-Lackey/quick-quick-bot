@@ -5,4 +5,5 @@ export const COMMAND_ARG_COUNT_REGEX = /^[0-9]+$/;
 
 export const COMMAND_NAME = "name";
 export const COMMAND_NPC = "npc";
-export const COMMANDS = [COMMAND_NAME, COMMAND_NPC];
+export const COMMAND_WARFARE = "warfare";
+export const COMMANDS = [COMMAND_NAME, COMMAND_NPC, COMMAND_WARFARE];

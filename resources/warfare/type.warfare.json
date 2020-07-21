@@ -1,0 +1,34 @@
+{
+  "flying": {
+    "attack": 0,
+    "power": 0,
+    "defense": 0,
+    "toughness": 0,
+    "morale": 3,
+    "cost": 2
+  },
+  "archers": {
+    "attack": 0,
+    "power": 1,
+    "defense": 0,
+    "toughness": 0,
+    "morale": 1,
+    "cost": 1.75
+  },
+  "cavalry": {
+    "attack": 1,
+    "power": 1,
+    "defense": 0,
+    "toughness": 0,
+    "morale": 2,
+    "cost": 1.5
+  },
+  "infantry": {
+    "attack": 0,
+    "power": 0,
+    "defense": 1,
+    "toughness": 1,
+    "morale": 0,
+    "cost": 1
+  }
+}
