@@ -39,6 +39,7 @@ export default class QQClient {
   private errorMessage = `Woah there, boss! I don't think you're speakin my language. I only understand the following:
     -> \`!qq name\` - This translates in to: create a bunch of random names.
     -> \`!qq npc\` - This translates in to: create a random npc.
+    -> \`!qq warfare\` - This translates in to: create a random warfare unit for MCDM's warfare rules.
   `;
 
   constructor() {
