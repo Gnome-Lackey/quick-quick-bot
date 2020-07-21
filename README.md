@@ -1,4 +1,4 @@
-[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VKWKZKMLU7YVU&currency_code=USD&source=url) Support this lowly gnome by buying him a coffee?
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=VKWKZKMLU7YVU&currency_code=USD&source=url) Support this lowly gnome by buying him a coffee. Every coin is greatly appreciated!
 
 # quick-quick-bot
 
