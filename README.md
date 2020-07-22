@@ -6,12 +6,12 @@ The trusted quick-quick gnome lackey is a bot to aid all DM/GMs when they need t
 
 That's where this bot comes in. No longer will you have to worry about name generation! Quick-Quick, your trusty gnome lackey, will do the work for you. Just give him a command, and he'll come up with something on the spot for you to impress your party. Instead of hearing "Peter? His name is Peter? That's so basic." you'll hear "Oh wow Sigard Sundafyllir, that's a baller name, did you just think of that?"
 
-Commands:<br/>
+**Jump to Commands:**<br/>
 [name](#cmd-name)<br/>
 [npc](#cmd-npc)<br/>
 [warfare](#cmd-warfare)<br/>
 
-How to:<br/>
+**Jump to Walkthroughs:**<br/>
 [Install on your server](#ht-server)<br/>
 [Contribute](#ht-contribute)<br/>
 
