@@ -6,6 +6,17 @@ The trusted quick-quick gnome lackey is a bot to aid all DM/GMs when they need t
 
 That's where this bot comes in. No longer will you have to worry about name generation! Quick-Quick, your trusty gnome lackey, will do the work for you. Just give him a command, and he'll come up with something on the spot for you to impress your party. Instead of hearing "Peter? His name is Peter? That's so basic." you'll hear "Oh wow Sigard Sundafyllir, that's a baller name, did you just think of that?"
 
+Commands:
+[name](#cmd-name)
+[npc](#cmd-npc)
+[warfare](#cmd-warfare)
+
+How to:
+[How to: Install on your server](#ht-server)
+[How to: Contribute](#ht-contribute)
+
+<a name="cmd-name"></a>
+
 ## Using Quick-Quick to Generate Names
 
 To generate random names with quick-quick all you need to do is type the following in a channel where the bot is included.
@@ -35,6 +46,8 @@ This will give you something like the following:
 
 ![example](./images/name_specific_command_example.png)
 
+<a name="cmd-npc"></a>
+
 ## Using Quick-Quick to Generate NPC
 
 To generate a random NPC with quick-quick all you need to do is type the following in a channel where the bot is included.
@@ -61,6 +74,8 @@ To use these arguments just add the value after the command, like so:
 This will give you something like the following:
 
 ![example](./images/npc_specific_command_example.png)
+
+<a name="cmd-warfare"></a>
 
 ## Using Quick-Quick to Generate MCDM Warfare Units
 
@@ -91,6 +106,8 @@ To use these arguments just add the value after the command, like so:
 This will give you something like the following:
 
 ![example](./images/warfare_specific_command_example.png)
+
+<a name="ht-server"></a>
 
 ## Getting Quick-Quick Working on your Server
 
@@ -180,6 +197,8 @@ Howdy boss! Quick-Quick gnome lackey at your service.
 If you navigate over to your discord server you should see _quick-quick_ in your server's channels. Be sure to lock down the permissions of the channels you don't want him to join!
 
 Hopefully, quick-quick does his work well. If he's acting up please make a formal complaint [here](https://github.com/Gnome-Lackey/quick-quick-bot/issues) specifying the commands issued, the responses (or lack there of) received, and the desired outcome you expected.
+
+<a name="ht-contribute"></a>
 
 ## Contributing to the Project
 
